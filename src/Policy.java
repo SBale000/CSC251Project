@@ -53,7 +53,7 @@ public class Policy {
  * @param instcSmokingStatus one of ['smoker' || 'non-smoker'], entered by user
  */
 	public Policy(int instcPolicyNum, String instcProviderName, String instcFirstName, String instcLastName, int instcAge, int instcHeight, 
-			double instcWeight, String instcSmokingStatus) {
+			int instcWeight, String instcSmokingStatus) {
 		
 		policyNum=instcPolicyNum;
 		providerName=instcProviderName;
@@ -113,7 +113,7 @@ public class Policy {
 	/**
 	 * @param int lclWeight in lbs
 	 */
-	public void setWeight(double lclWeight) {
+	public void setWeight(int lclWeight) {
 		weightLbs=lclWeight;
 	}
 	
@@ -187,7 +187,7 @@ public class Policy {
 	public double getBMI() {
 		int heightSquared=getHeight()*getHeight();
 		int lclWeight=getWeight();
-		double bmi;
+		double bmi=0;
 		
 		return bmi;
 		
