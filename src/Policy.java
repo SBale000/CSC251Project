@@ -181,15 +181,57 @@ public class Policy {
 	}
 	
 	/**
-	 * Create method-scoped vars of age, height, weight from getters to prevent using stale instance state data
+	 * Create method-scoped vars of height, weight from getters to prevent side effects
 	 * @return double
 	 */
-	public double getBMI() {
+	public int getBMI() {
 		int heightSquared=getHeight()*getHeight();
-		int lclWeight=getWeight();
-		double bmi=0;
+		int weight=getWeight();
+		final int CONV_FACTOR=703;
+		return (weight*CONV_FACTOR)/heightSquared;
 		
-		return bmi;
+	}
+	/**
+	 * Calculate policy price based on age, BMI, and smoking status
+	 * @return price the policy price
+	 */
+	public double getPrice() {
+		final double BASE_PRICE=600.00;
+		final double ADDL_FEE_AGE=75.00;
+		final double ADDL_FEE_SMOKING=100.00;
+		final double ADDL_FEE_PER_BMI=20.00;
+		final int AGE_THRESH=50;
+		final int BMI_THRESH=35;
+		double excessBMI=Double.max(getBMI()-BMI_THRESH, 0.00);
+		
+		double price=(getAge()>50) 
+						? BASE_PRICE+ADDL_FEE_AGE
+						: BASE_PRICE ;
+		
+		
+		price +=  ADDL_FEE_PER_BMI*excessBMI;
+		
+		if (smokingStatus.equalsIgnoreCase("smoker")) {
+			price += ADDL_FEE_SMOKING;
+		}
+		
+		return price;
+	}
+	
+	public String toString() {
+		String str=
+				"\nPolicy information:\n\n" +
+				"Policy number: " + policyNum +
+				"\nProvider name: " + providerName +
+				"\nFirst name: " + firstName +
+				"\nLast name: " + lastName +
+				"\nAge: " + age +
+				"\nHeight in inches: " + heightInches +
+				"\nWeight in pounds: " + weightLbs +
+				"\nSmoking status: " + smokingStatus +
+				"\nBMI: " + getBMI() +
+				"\nPolicy price: $" + String.format("%,.2f",getPrice());
+		return str;
 		
 	}
 	
