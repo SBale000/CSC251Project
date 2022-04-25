@@ -109,6 +109,7 @@ public class Policy {
 	}
 	
 	
+
 	@Override
 	public String toString() {
 		String str=
@@ -116,10 +117,8 @@ public class Policy {
 				"\nProvider name: " + providerName +
 				"\nPolicy price: $" + String.format("%,.2f", getPrice());
 		return str;
-		
-	}
-	
-	//*/
+
+
 	
   
 } //End class
